@@ -9,7 +9,7 @@ interface State {
 
 class Task01Class extends React.Component<{}, State> {
 	state: State = {
-		movies: JSON.parse(localStorage.getItem('movies')!) || [],
+		movies: JSON.parse(localStorage.getItem('movies') || '[]'),
 	};
 
 	componentDidMount(): void {
@@ -39,7 +39,10 @@ class Task01Class extends React.Component<{}, State> {
 	movieRemove = (index: number): void => {
 		this.setState(prevState => ({
 			...prevState,
-			movies: prevState.movies.filter(movie => movie.id !== prevState.movies[index].id)
+			movies:
+				prevState.movies.length > 1 ?
+					prevState.movies.filter(movie => movie.id !== prevState.movies[index].id)
+					: []
 		}));
 	};
 
@@ -53,6 +56,7 @@ class Task01Class extends React.Component<{}, State> {
 							<MovieItemClass
 								key={movie.id}
 								title={movie.title}
+								index={index + 1}
 								onMovieEdit={(e) => this.movieEdit(e, index)}
 								onMovieRemove={() => this.movieRemove(index)}
 							/>
