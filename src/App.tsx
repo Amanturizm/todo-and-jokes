@@ -5,8 +5,8 @@ import Task01Fc from "./containers/Task01/Task01FC";
 const App = () => {
 	return (
 		<div>
-			{/*<Task01Class /> /!* Class Style *!/*/}
-			<Task01Fc />    {/* Function Style */}
+			<Task01Class /> {/* Class Style */}
+			{/*<Task01Fc />    /!* Function Style *!/*/}
 		</div>
 	);
 };

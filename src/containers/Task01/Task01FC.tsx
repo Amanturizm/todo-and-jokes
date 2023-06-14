@@ -4,36 +4,18 @@ import MovieItemFc from "../../components/MovieItem/MovieItemFC";
 
 const Task01Fc = () => {
 	const startData = JSON.parse(localStorage.getItem('movies')!) || [];
+
 	const [movies, setMovies] = useState<IMovieItem[]>(startData);
 
-	useEffect(() => {
-		localStorage.setItem('movies', JSON.stringify(movies));
-	}, []);
-
-	useEffect(() => {
-		localStorage.setItem('movies', JSON.stringify(movies));
-	}, [movies]);
+	useEffect(() => localStorage.setItem('movies', JSON.stringify(movies)), []);
+	useEffect(() => localStorage.setItem('movies', JSON.stringify(movies)), [movies]);
 
 	const addMovie = (newMovie: IMovieItem): void => {
-		setMovies(prevState => {
-			return [...prevState, { ...newMovie }]
-		});
+		setMovies(prevState => [...prevState, { ...newMovie }]);
 	};
 
-	const movieEdit = (e: React.ChangeEvent<HTMLInputElement>, index: number): void => {
-		setMovies(prevState => {
-			const moviesCopy: IMovieItem[] = [ ...prevState ];
-			const movieCopy: IMovieItem = { ...moviesCopy[index] };
-			movieCopy.title = e.target.value;
-			moviesCopy[index] = movieCopy;
-			return moviesCopy;
-		});
-	};
-
-	const movieRemove = (index: number): void => {
-		setMovies(prevState => {
-			return prevState.filter(movie => movie.id !== prevState[index].id)
-		});
+	const movieRemove = (id: string): void => {
+		setMovies(prevState => prevState.filter(movie => movie.id !== id));
 	};
 
 	return (
@@ -43,10 +25,11 @@ const Task01Fc = () => {
 				{
 					movies.map((movie: IMovieItem, index: number) => (
 						<MovieItemFc
+							id={movie.id}
 							key={movie.id}
+							index={index}
 							title={movie.title}
-							onMovieEdit={e => movieEdit(e, index)}
-							onMovieRemove={() => movieRemove(index)}
+							onMovieRemove={() => movieRemove(movie.id)}
 						/>
 					))
 				}

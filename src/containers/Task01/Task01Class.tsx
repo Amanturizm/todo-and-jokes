@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import React from 'react';
 import MovieFormClass from "../../components/MovieForm/MovieFormClass";
 import MovieItemClass from "../../components/MovieItem/MovieItemClass";
@@ -9,7 +8,7 @@ interface State {
 
 class Task01Class extends React.Component<{}, State> {
 	state: State = {
-		movies: JSON.parse(localStorage.getItem('movies') || '[]'),
+		movies: JSON.parse(localStorage.getItem('movies')!) || [],
 	};
 
 	componentDidMount(): void {
@@ -26,23 +25,10 @@ class Task01Class extends React.Component<{}, State> {
 		}))
 	};
 
-	movieEdit = (e: React.ChangeEvent<HTMLInputElement>, index: number): void => {
-		this.setState(prevState => {
-			const moviesCopy: IMovieItem[] = [ ...prevState.movies ];
-			const movieCopy: IMovieItem = { ...moviesCopy[index] };
-			movieCopy.title = e.target.value;
-			moviesCopy[index] = movieCopy;
-			return {...prevState, movies: moviesCopy};
-		});
-	};
-
-	movieRemove = (index: number): void => {
+	movieRemove = (id: string): void => {
 		this.setState(prevState => ({
 			...prevState,
-			movies:
-				prevState.movies.length > 1 ?
-					prevState.movies.filter(movie => movie.id !== prevState.movies[index].id)
-					: []
+			movies: prevState.movies.filter(movie => movie.id !== id)
 		}));
 	};
 
@@ -55,10 +41,10 @@ class Task01Class extends React.Component<{}, State> {
 						this.state.movies.map((movie: IMovieItem, index: number) => (
 							<MovieItemClass
 								key={movie.id}
+								id={movie.id}
+								index={index}
 								title={movie.title}
-								index={index + 1}
-								onMovieEdit={(e) => this.movieEdit(e, index)}
-								onMovieRemove={() => this.movieRemove(index)}
+								onMovieRemove={() => this.movieRemove(movie.id)}
 							/>
 						))
 					}

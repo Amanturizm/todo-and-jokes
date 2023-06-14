@@ -27,7 +27,13 @@ class MovieFormClass extends React.Component<Props, State> {
 		return (
 			<form className="d-flex gap-3" onSubmit={this.getNewMovie}>
 				<input type="text" className="input-group" value={this.state.title} onChange={this.inputValueChange}/>
-				<button type="submit" className="btn btn-outline-dark">Add</button>
+				<button
+					type="submit"
+					className="btn btn-outline-dark"
+					disabled={this.state.title.length > 1 ? false : true}
+				>
+					Add
+				</button>
 			</form>
 		);
 	};
