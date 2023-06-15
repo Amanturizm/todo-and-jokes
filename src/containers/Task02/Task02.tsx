@@ -4,6 +4,7 @@ import JokesButton from "../../components/JokesButton/JokesButton";
 
 const url: string = 'https://api.chucknorris.io/jokes/random';
 const amountJokes: number = 5;
+
 const Task02 = () => {
 	const [jokes, setJokes] = useState<IJoke[]>([]);
 

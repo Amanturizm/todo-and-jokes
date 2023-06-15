@@ -13,16 +13,16 @@ class Task01Class extends React.Component<{}, State> {
 
 	componentDidMount(): void {
 		localStorage.setItem('movies', JSON.stringify(this.state.movies));
-	}
+	};
 
 	componentDidUpdate(): void {
 		localStorage.setItem('movies', JSON.stringify(this.state.movies));
-	}
+	};
 
 	addMovie = (newMovie: IMovieItem): void => {
 		this.setState(prevState => ({
 			movies: [...prevState.movies, { ...newMovie }]
-		}))
+		}));
 	};
 
 	movieRemove = (id: string): void => {
@@ -52,6 +52,6 @@ class Task01Class extends React.Component<{}, State> {
 			</div>
 		);
 	};
-}
+};
 
 export default Task01Class;

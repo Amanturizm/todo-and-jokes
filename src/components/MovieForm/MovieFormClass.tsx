@@ -1,5 +1,5 @@
-import { nanoid } from "nanoid";
 import React from 'react';
+import { nanoid } from "nanoid";
 
 interface Props {
 	addMovie: (newMovie: IMovieItem) => void;
@@ -12,7 +12,7 @@ interface State {
 class MovieFormClass extends React.Component<Props, State> {
 	state: State = {
 		title: '',
-	}
+	};
 
 	inputValueChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		this.setState({title: e.target.value})
@@ -20,7 +20,8 @@ class MovieFormClass extends React.Component<Props, State> {
 
 	getNewMovie = (e: React.FormEvent): void => {
 		e.preventDefault();
-		this.props.addMovie({...this.state, id: nanoid()});
+		this.props.addMovie({ ...this.state, id: nanoid() });
+		this.setState({ title: '' });
 	};
 
 	render() {

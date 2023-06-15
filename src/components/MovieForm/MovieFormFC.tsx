@@ -1,9 +1,10 @@
-import { nanoid } from "nanoid";
 import React, { useState } from 'react';
+import { nanoid } from "nanoid";
 
 interface Props {
 	addMovie: (newMovie: IMovieItem) => void;
 }
+
 const MovieFormFc: React.FC<Props> = ({ addMovie }) => {
 	const [title, setTitle] = useState<string>('');
 
@@ -14,6 +15,7 @@ const MovieFormFc: React.FC<Props> = ({ addMovie }) => {
 	const getNewMovie = (e: React.FormEvent): void => {
 		e.preventDefault();
 		addMovie({ title, id: nanoid() });
+		setTitle('');
 	};
 
 	return (

@@ -18,7 +18,7 @@ class MovieItemClass extends React.Component<Props, State> {
 
 	shouldComponentUpdate(nextProps: Readonly<Props>, nextState: Readonly<State>): boolean {
 		return nextProps.title !== nextState.movie;
-	}
+	};
 
 	componentDidUpdate(): void {
 		const moviesCopy = JSON.parse(localStorage.getItem('movies')!);
